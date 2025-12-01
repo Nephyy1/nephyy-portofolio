@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award, CheckCircle2 } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
 
@@ -252,22 +252,24 @@ export default function Home() {
                </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-in fade-in slide-in-from-bottom-8 duration-700">
               {certificates.map((cert) => (
-                <div key={cert.id} className="group relative rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
-                  <div className="aspect-[4/3] overflow-hidden bg-secondary relative">
+                <div key={cert.id} className="group relative rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-500 flex flex-col">
+                  <div className="aspect-[4/3] overflow-hidden bg-secondary relative border-b border-border/50">
                     <img 
                       src={cert.image} 
                       alt={cert.title} 
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60"></div>
                   </div>
-                  <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                    <div className="inline-block px-2 py-1 rounded bg-primary/20 backdrop-blur-md border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-2">
-                      Verified
+                  <div className="p-6 bg-card flex-1">
+                    <div className="flex items-center justify-between mb-3">
+                        <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider">
+                          <CheckCircle2 className="w-3 h-3" />
+                          Verified
+                        </div>
                     </div>
-                    <h3 className="text-lg font-bold text-foreground leading-tight mb-1">{cert.title}</h3>
+                    <h3 className="text-lg font-bold text-foreground leading-tight mb-2 group-hover:text-primary transition-colors">{cert.title}</h3>
                     <p className="text-sm text-muted-foreground">{cert.issuer}</p>
                   </div>
                 </div>
@@ -340,5 +342,5 @@ export default function Home() {
         </div>
       </footer>
     </div>
-  )
+  }
 }
