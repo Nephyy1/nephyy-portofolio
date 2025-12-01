@@ -340,7 +340,8 @@ export default function Home() {
              <Link href="https://nephyy.my.id" className="text-muted-foreground hover:text-foreground transition-colors hover:scale-110"><Globe className="w-5 h-5" /></Link>
           </div>
         </div>
-      </footer>
+       </footer>
     </div>
-  }
+  )
 }
+      
