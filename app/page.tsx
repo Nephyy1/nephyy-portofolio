@@ -129,6 +129,7 @@ export default function Home() {
             </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               <Link href="#about" className="hover:text-primary transition-colors hover:underline underline-offset-4">Tentang</Link>
+              <Link href="#achievements" className="hover:text-primary transition-colors hover:underline underline-offset-4">Sertifikat</Link>
               <Link href="#projects" className="hover:text-primary transition-colors hover:underline underline-offset-4">Portofolio</Link>
               <Link href="#blog" className="hover:text-primary transition-colors hover:underline underline-offset-4">Artikel</Link>
             </nav>
@@ -349,7 +350,59 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    </h3>
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
+                      {project.description}
+                    </p>
+                    {project.link && (
+                      <Link href={project.link} target="_blank" className="inline-flex items-center text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto group/link">
+                        Lihat Detail <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
+                      </Link>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="blog" className="py-24 bg-background">
+           <div className="container mx-auto px-6 max-w-6xl">
+              <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+                 <div>
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
+                       <BookOpen className="w-8 h-8 text-primary" /> Jurnal Teknologi
+                    </h2>
+                    <p className="text-muted-foreground text-lg max-w-xl">
+                       Catatan, pemikiran, dan pandangan mendalam seputar perkembangan teknologi modern.
+                    </p>
+                 </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {displayArticles.map((article) => (
+                  <Link href="#" key={article.id} className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
+                    <div className="h-56 bg-secondary relative overflow-hidden">
+                       <img 
+                          src={article.cover_image} 
+                          alt={article.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                       />
+                       <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent opacity-60"></div>
+                       <div className="absolute top-4 left-4">
+                          <span className="px-3 py-1 rounded-full bg-background/80 backdrop-blur text-xs font-bold shadow-sm border border-border">
+                             Artikel
+                          </span>
+                       </div>
+                    </div>
+                    <div className="p-6 flex flex-col flex-1">
+                       <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                          <Calendar className="w-3 h-3" />
+                          <span>{new Date(article.created_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</span>
+                       </div>
+                       <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
+                          {article.title}
+                       </h3>
                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-6 flex-1">
                           {article.excerpt}
                        </p>
@@ -379,4 +432,4 @@ export default function Home() {
       </footer>
     </div>
   )
-}
+}}}
