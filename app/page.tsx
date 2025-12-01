@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, Cpu, Database, Network, Code, GraduationCap, MapPin } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, Cpu, Database, Network, Code, User, GraduationCap, MapPin, Phone } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
 
@@ -39,7 +39,7 @@ export default function Home() {
     {
       id: 101,
       title: "E-Commerce Infrastructure",
-      description: "Arsitektur jual-beli digital yang scalable dengan manajemen inventaris real-time dan gateway pembayaran terintegrasi.",
+      description: "Arsitektur jual-beli digital yang skalabel dengan manajemen inventaris waktu nyata dan gerbang pembayaran terintegrasi.",
       tags: ["Fullstack", "System Design"],
       link: "#"
     },
@@ -53,7 +53,7 @@ export default function Home() {
     {
       id: 103,
       title: "AI & Data Engineering",
-      description: "Eksperimen integrasi Large Language Models (LLM) dengan database SQL untuk analisis data prediktif.",
+      description: "Eksperimen integrasi Model Bahasa Besar (LLM) dengan basis data SQL untuk analisis data prediktif.",
       tags: ["Python", "SQL", "AI"],
       link: "#"
     }
@@ -84,7 +84,7 @@ export default function Home() {
                 target="_blank"
                 className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all hover:scale-105"
              >
-                Hubungi Bintang
+                Hubungi Saya
              </Link>
           </div>
         </div>
@@ -101,23 +101,23 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              Open for Collaboration
+              Terbuka untuk Kolaborasi Proyek
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-              Bintang Putra <br />
+              Transformasi Ide <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500">
-                Pratama.
+                Menjadi Realitas.
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-              Dikenal secara digital sebagai <span className="text-foreground font-semibold">Nephyy</span>. Siswa SMK yang mendedikasikan diri untuk membangun ekosistem web modern dan teknologi masa depan.
+              Membangun ekosistem digital yang modern, skalabel, dan berorientasi pada pengalaman pengguna melalui kode yang efisien.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
                <Link href="#projects" className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all hover:pr-10 group">
-                  Lihat Karya Saya <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Eksplorasi Karya <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                </Link>
                <Link href="https://github.com/Nephyy1" target="_blank" className="h-12 px-8 rounded-full border border-border bg-background hover:bg-secondary font-semibold flex items-center gap-2 transition-all">
                   <Github className="w-4 h-4" /> GitHub
@@ -126,93 +126,117 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="py-24 border-t border-border/50">
+        <section id="about" className="py-24 border-t border-border/50 bg-secondary/5">
           <div className="container mx-auto px-6 max-w-6xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-               <div>
-                  <h2 className="text-3xl font-bold mb-6">Profil Profesional</h2>
-                  
-                  <div className="bg-card border border-border rounded-2xl p-6 mb-8 shadow-sm">
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <GraduationCap className="w-6 h-6" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg">Pendidikan</h3>
-                        <p className="text-muted-foreground">SMK Negeri 2 Banyumas</p>
-                      </div>
-                    </div>
+            <div className="flex flex-col md:flex-row gap-12 items-start">
+               
+               <div className="w-full md:w-1/3 space-y-6 sticky top-24">
+                  <h2 className="text-3xl font-bold mb-2">Profil Profesional</h2>
+                  <div className="bg-card border border-border rounded-2xl p-6 shadow-sm space-y-5">
                     <div className="flex items-center gap-4">
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                        <MapPin className="w-6 h-6" />
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <User className="w-5 h-5" />
                       </div>
                       <div>
-                        <h3 className="font-bold text-lg">Domisili</h3>
-                        <p className="text-muted-foreground">Jawa Tengah, Indonesia</p>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Nama Lengkap</div>
+                        <div className="font-medium">Bintang Putra Pratama</div>
                       </div>
                     </div>
-                  </div>
-
-                  <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent pl-2">
                     
-                    <div className="relative flex items-center gap-6 group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
-                        <Cpu className="w-5 h-5 text-primary" />
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <Terminal className="w-5 h-5" />
                       </div>
-                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
-                        <div className="font-bold text-lg">2025: AI Integration</div>
-                        <div className="text-muted-foreground text-sm mt-1">Implementasi Deep Learning & SQL Optimization.</div>
-                      </div>
-                    </div>
-
-                    <div className="relative flex items-center gap-6 group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
-                        <Network className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
-                        <div className="font-bold text-lg">2023: Fullstack Era</div>
-                        <div className="text-muted-foreground text-sm mt-1">Pengembangan sistem kompleks dengan Next.js ecosystem.</div>
+                      <div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Identitas Digital</div>
+                        <div className="font-medium">Nephyy</div>
                       </div>
                     </div>
 
-                    <div className="relative flex items-center gap-6 group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
-                        <Code className="w-5 h-5 text-primary" />
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <GraduationCap className="w-5 h-5" />
                       </div>
-                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
-                        <div className="font-bold text-lg">2020: The Beginning</div>
-                        <div className="text-muted-foreground text-sm mt-1">Fondasi Web Development (HTML/CSS/JS).</div>
+                      <div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Institusi Pendidikan</div>
+                        <div className="font-medium">SMK Negeri 2 Banyumas</div>
                       </div>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                        <MapPin className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground uppercase tracking-wider font-semibold">Domisili</div>
+                        <div className="font-medium">Jawa Tengah, Indonesia</div>
+                      </div>
+                    </div>
+
+                    <div className="pt-4 border-t border-border mt-4">
+                      <Link 
+                        href="https://wa.me/6281533331355" 
+                        target="_blank"
+                        className="flex items-center justify-center gap-2 w-full py-2.5 rounded-lg bg-secondary hover:bg-secondary/80 text-sm font-medium transition-colors"
+                      >
+                        <Phone className="w-4 h-4" /> Hubungi via WhatsApp
+                      </Link>
+                    </div>
+                  </div>
+               </div>
+
+               <div className="w-full md:w-2/3">
+                  <h3 className="text-2xl font-bold mb-6">Tentang Saya</h3>
+                  <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed text-muted-foreground">
+                    <p className="mb-6">
+                      Saya adalah seorang <span className="text-foreground font-semibold">Technologist</span> muda yang memiliki dedikasi tinggi terhadap pengembangan perangkat lunak modern. Memulai perjalanan dari rasa ingin tahu, kini saya fokus merancang solusi digital yang tidak hanya berfungsi dengan baik, tetapi juga memberikan nilai tambah bagi penggunanya.
+                    </p>
+                    <p className="mb-8">
+                      Sebagai siswa di SMK Negeri 2 Banyumas, saya menyeimbangkan pembelajaran akademis dengan eksplorasi teknologi praktis. Saya percaya bahwa kode pemrograman adalah jembatan antara logika mesin dan kebutuhan manusia. Portofolio ini adalah dokumentasi dari komitmen saya untuk terus belajar, berinovasi, dan berkarya.
+                    </p>
+                  </div>
+
+                  <h3 className="text-2xl font-bold mb-6 mt-12">Jejak Perjalanan</h3>
+                  <div className="space-y-8 pl-2 relative before:absolute before:inset-0 before:ml-2 before:w-0.5 before:bg-gradient-to-b before:from-primary/50 before:to-transparent">
+                    
+                    <div className="relative pl-8 group">
+                      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-primary bg-background group-hover:scale-110 transition-transform"></div>
+                      <h4 className="font-bold text-lg text-foreground">2025: Integrasi Kecerdasan Buatan</h4>
+                      <p className="text-muted-foreground mt-2">
+                        Fokus mendalami implementasi AI dan optimalisasi basis data untuk aplikasi yang lebih cerdas dan responsif.
+                      </p>
+                    </div>
+
+                    <div className="relative pl-8 group">
+                      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-primary bg-background group-hover:scale-110 transition-transform"></div>
+                      <h4 className="font-bold text-lg text-foreground">2023: Ekosistem Fullstack</h4>
+                      <p className="text-muted-foreground mt-2">
+                        Transisi ke teknologi modern berbasis JavaScript (Next.js, TypeScript) untuk membangun sistem yang kompleks dan handal.
+                      </p>
+                    </div>
+
+                    <div className="relative pl-8 group">
+                      <div className="absolute left-0 top-1.5 w-4 h-4 rounded-full border-2 border-muted-foreground bg-background group-hover:scale-110 transition-transform"></div>
+                      <h4 className="font-bold text-lg text-foreground">2020: Awal Eksplorasi</h4>
+                      <p className="text-muted-foreground mt-2">
+                        Memulai langkah pertama dalam dunia pemrograman web, mempelajari fondasi logika dan struktur kode.
+                      </p>
                     </div>
 
                   </div>
                </div>
 
-               <div className="bg-secondary/20 p-8 rounded-3xl border border-border/50 sticky top-24">
-                  <Terminal className="w-10 h-10 text-primary mb-6" />
-                  <h3 className="text-2xl font-bold mb-4">Tentang Nephyy</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    "Sebagai siswa SMK, saya tidak hanya belajar kode, tapi memanfaatkannya untuk memecahkan masalah nyata. **Nephyy** adalah identitas dimana kreativitas dan logika bertemu."
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {['Next.js', 'React Native', 'Supabase', 'Node.js', 'TypeScript', 'Tailwind'].map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-background rounded-md text-sm font-medium border border-border shadow-sm">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-               </div>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="py-24 bg-secondary/10">
+        <section id="projects" className="py-24 bg-background">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4">Showcase Proyek</h2>
                 <p className="text-muted-foreground text-lg max-w-xl">
-                   Kumpulan solusi digital yang telah saya bangun, menggabungkan performa tinggi dan desain intuitif.
+                   Kumpulan solusi digital terpilih yang menggabungkan performa tinggi, keamanan, dan desain intuitif.
                 </p>
               </div>
               <Link href="#" className="text-primary font-semibold hover:underline underline-offset-4 flex items-center gap-2">
@@ -222,27 +246,26 @@ export default function Home() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {displayProjects.map((project) => (
-                <div key={project.id} className="group flex flex-col h-full bg-background border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
-                  <div className="h-48 bg-gradient-to-br from-secondary to-background relative overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-100 transition-opacity duration-500">
-                       <Database className="w-16 h-16 text-primary/20" />
-                    </div>
+                <div key={project.id} className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300 hover:-translate-y-1">
+                  <div className="h-48 bg-gradient-to-br from-secondary to-background relative overflow-hidden flex items-center justify-center">
+                    <div className="absolute inset-0 bg-grid-white/5 mask-image-gradient"></div>
+                    <Database className="w-16 h-16 text-primary/20 group-hover:text-primary/40 transition-colors duration-500 transform group-hover:scale-110" />
                   </div>
                   <div className="p-6 flex flex-col flex-1">
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags?.map((tag, idx) => (
-                        <span key={idx} className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-secondary text-foreground/70">
+                        <span key={idx} className="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-secondary text-foreground/70 border border-border/50">
                           {tag}
                         </span>
                       ))}
                     </div>
                     <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1">
+                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
                       {project.description}
                     </p>
                     {project.link && (
-                      <Link href={project.link} target="_blank" className="inline-flex items-center text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto">
-                        Lihat Detail <ArrowRight className="ml-2 w-4 h-4" />
+                      <Link href={project.link} target="_blank" className="inline-flex items-center text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto group/link">
+                        Lihat Detail <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
                       </Link>
                     )}
                   </div>
@@ -257,8 +280,8 @@ export default function Home() {
       <footer className="bg-background border-t border-border py-12">
         <div className="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <h4 className="font-bold text-lg mb-1">Bintang P. Pratama (Nephyy)</h4>
-            <p className="text-sm text-muted-foreground">© 2025 Creative Technologist. All rights reserved.</p>
+            <h4 className="font-bold text-lg mb-1">Bintang Putra Pratama (Nephyy)</h4>
+            <p className="text-sm text-muted-foreground">© 2025 Creative Technologist. Hak Cipta Dilindungi.</p>
           </div>
           <div className="flex gap-6">
              <Link href="https://github.com/Nephyy1" className="text-muted-foreground hover:text-foreground transition-colors"><Github className="w-5 h-5" /></Link>
@@ -269,3 +292,4 @@ export default function Home() {
     </div>
   )
 }
+      
