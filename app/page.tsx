@@ -2,17 +2,9 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award, CheckCircle2, BookOpen, Calendar } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Sparkles, Award, CheckCircle2, BookOpen, Calendar } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
-
-interface Project {
-  id: number
-  title: string
-  description: string
-  tags: string[]
-  link: string
-}
 
 interface Article {
   id: number
@@ -24,15 +16,11 @@ interface Article {
 }
 
 export default function Home() {
-  const [dbProjects, setDbProjects] = useState<Project[]>([])
   const [dbArticles, setDbArticles] = useState<Article[]>([])
   
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: projects } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
-        if (projects) setDbProjects(projects)
-
         const { data: articles } = await supabase.from('articles').select('*').order('created_at', { ascending: false })
         if (articles) setDbArticles(articles)
       } catch (error) {
@@ -42,51 +30,27 @@ export default function Home() {
     fetchData()
   }, [])
 
-  const defaultProjects = [
-    {
-      id: 101,
-      title: "E-Commerce Infrastructure",
-      description: "Arsitektur jual-beli digital yang skalabel dengan manajemen inventaris waktu nyata dan gerbang pembayaran terintegrasi.",
-      tags: ["Fullstack", "System Design"],
-      link: "#"
-    },
-    {
-      id: 102,
-      title: "Automated Bot Systems",
-      description: "Implementasi asisten virtual cerdas pada WhatsApp & Telegram untuk efisiensi layanan pelanggan berbasis API.",
-      tags: ["Node.js", "Automation"],
-      link: "#"
-    },
-    {
-      id: 103,
-      title: "AI & Data Engineering",
-      description: "Eksperimen integrasi Model Bahasa Besar (LLM) dengan basis data SQL untuk analisis data prediktif.",
-      tags: ["Python", "SQL", "AI"],
-      link: "#"
-    }
-  ]
-
   const defaultArticles = [
     {
       id: 201,
-      title: "Masa Depan AI dalam Pengembangan Web: Ancaman atau Peluang?",
-      excerpt: "Menganalisis bagaimana Generative AI mengubah cara kita menulis kode, mendesain UI, dan dampaknya bagi karir developer di 5 tahun mendatang.",
+      title: "Masa Depan AI dalam Pengembangan Web",
+      excerpt: "Menganalisis bagaimana Generative AI mengubah cara kita menulis kode, mendesain UI, dan dampaknya bagi karir developer.",
       slug: "ai-web-dev",
       cover_image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop",
       created_at: new Date().toISOString()
     },
     {
       id: 202,
-      title: "Optimasi Performa Next.js untuk Core Web Vitals",
-      excerpt: "Panduan teknis mendalam tentang Server Components, Image Optimization, dan strategi caching untuk mencapai skor Lighthouse 100.",
+      title: "Optimasi Performa Next.js",
+      excerpt: "Panduan teknis mendalam tentang Server Components, Image Optimization, dan strategi caching untuk skor Lighthouse 100.",
       slug: "nextjs-performance",
       cover_image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
       created_at: new Date().toISOString()
     },
     {
       id: 203,
-      title: "Mengapa TypeScript Adalah Investasi Wajib di 2025",
-      excerpt: "Menjelaskan mengapa Type Safety bukan hanya soal mencegah bug, tapi tentang skalabilitas tim dan maintainability kode jangka panjang.",
+      title: "TypeScript di Tahun 2025",
+      excerpt: "Menjelaskan mengapa Type Safety bukan hanya soal mencegah bug, tapi tentang skalabilitas tim jangka panjang.",
       slug: "typescript-2025",
       cover_image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop",
       created_at: new Date().toISOString()
@@ -114,7 +78,6 @@ export default function Home() {
     }
   ]
 
-  const displayProjects = dbProjects.length > 0 ? dbProjects : defaultProjects
   const displayArticles = dbArticles.length > 0 ? dbArticles : defaultArticles
 
   return (
@@ -130,7 +93,6 @@ export default function Home() {
             <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               <Link href="#about" className="hover:text-primary transition-colors hover:underline underline-offset-4">Tentang</Link>
               <Link href="#achievements" className="hover:text-primary transition-colors hover:underline underline-offset-4">Sertifikat</Link>
-              <Link href="#projects" className="hover:text-primary transition-colors hover:underline underline-offset-4">Portofolio</Link>
               <Link href="#blog" className="hover:text-primary transition-colors hover:underline underline-offset-4">Artikel</Link>
             </nav>
           </div>
@@ -170,8 +132,8 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-8 duration-1000 delay-500">
-               <Link href="#projects" className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-semibold flex items-center gap-2 shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all hover:pr-10 hover:scale-105 active:scale-95 group">
-                  Eksplorasi Karya <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+               <Link href="#blog" className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-semibold flex items-center gap-2 shadow-lg shadow-primary/25 hover:bg-primary/90 transition-all hover:pr-10 hover:scale-105 active:scale-95 group">
+                  Baca Jurnal <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                </Link>
                <Link href="https://github.com/Nephyy1" target="_blank" className="h-12 px-8 rounded-full border border-border bg-background hover:bg-secondary font-semibold flex items-center gap-2 transition-all hover:scale-105 active:scale-95">
                   <Github className="w-4 h-4" /> GitHub
@@ -185,7 +147,6 @@ export default function Home() {
             <div className="flex flex-col md:flex-row gap-12 items-start">
                
                <div className="w-full md:w-1/3 sticky top-24 z-10 animate-in fade-in slide-in-from-left-8 duration-700 delay-200">
-                  <h2 className="text-3xl font-bold mb-6 md:hidden">Profil Profesional</h2>
                   <div className="bg-card/50 backdrop-blur-sm border border-border/60 rounded-2xl p-6 shadow-sm space-y-5 hover:border-primary/30 transition-colors duration-300">
                     <div className="flex items-center gap-4">
                       <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0 ring-1 ring-primary/20">
@@ -240,7 +201,7 @@ export default function Home() {
                </div>
 
                <div className="w-full md:w-2/3 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
-                  <h2 className="text-3xl font-bold mb-6 hidden md:block">Profil Profesional</h2>
+                  <h2 className="text-3xl font-bold mb-6">Profil Profesional</h2>
                   
                   <div className="prose prose-neutral dark:prose-invert max-w-none text-lg leading-relaxed text-muted-foreground">
                     <p className="mb-6">
@@ -317,56 +278,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="py-24 bg-secondary/10">
-          <div className="container mx-auto px-6 max-w-6xl">
-            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold mb-4">Showcase Proyek</h2>
-                <p className="text-muted-foreground text-lg max-w-xl">
-                   Kumpulan solusi digital terpilih yang menggabungkan performa tinggi, keamanan, dan desain intuitif.
-                </p>
-              </div>
-              <Link href="#" className="text-primary font-semibold hover:underline underline-offset-4 flex items-center gap-2 group">
-                Lihat Semua di GitHub <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {displayProjects.map((project, idx) => (
-                <div 
-                  key={project.id} 
-                  className="group flex flex-col h-full bg-background border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2"
-                  style={{ animationDelay: `${idx * 100}ms` }}
-                >
-                  <div className="h-48 bg-gradient-to-br from-secondary to-background relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
-                    <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
-                    <Database className="w-16 h-16 text-primary/20 group-hover:text-primary/40 transition-colors duration-500 transform group-hover:scale-110 group-hover:rotate-3" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-1 relative z-10 bg-background">
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags?.map((tag, idx) => (
-                        <span key={idx} className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-secondary text-secondary-foreground border border-border/50">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-                      {project.description}
-                    </p>
-                    {project.link && (
-                      <Link href={project.link} target="_blank" className="inline-flex items-center text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto group/link">
-                        Lihat Detail <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="blog" className="py-24 bg-background">
+        <section id="blog" className="py-24 bg-background border-t border-border/50">
            <div className="container mx-auto px-6 max-w-6xl">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
                  <div>
@@ -381,7 +293,7 @@ export default function Home() {
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {displayArticles.map((article) => (
-                  <Link href="#" key={article.id} className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
+                  <Link href={`/blog/${article.slug}`} key={article.id} className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
                     <div className="h-56 bg-secondary relative overflow-hidden">
                        <img 
                           src={article.cover_image} 
@@ -432,4 +344,4 @@ export default function Home() {
       </footer>
     </div>
   )
-}
+} 
