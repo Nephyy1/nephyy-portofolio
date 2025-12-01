@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useRouter } from 'next/navigation'
-import { Trash2 } from 'lucide-react'
+import { Trash2, LogOut, Plus, LayoutDashboard } from 'lucide-react'
 
 export default function AdminPage() {
   const router = useRouter()
-  const [activeTab, setActiveTab] = useState('projects')
-  const [loading, setLoading] = useState(false)
   const [projects, setProjects] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+  const [uploading, setUploading] = useState(false)
   
   const [formProject, setFormProject] = useState({
     title: '',
@@ -19,28 +19,37 @@ export default function AdminPage() {
   })
 
   useEffect(() => {
-    fetchProjects()
-  }, [])
+    const checkSession = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (!session) {
+        router.push('/login')
+      } else {
+        fetchProjects()
+        setLoading(false)
+      }
+    }
+    checkSession()
+  }, [router])
 
   const fetchProjects = async () => {
     const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
     if (data) setProjects(data)
   }
 
-  const handleDeleteProject = async (id: number) => {
-    if(!confirm('Yakin hapus proyek ini?')) return
-    
-    const { error } = await supabase.from('projects').delete().eq('id', id)
-    if (!error) {
-      alert('Terhapus')
-      fetchProjects()
-      router.refresh()
-    }
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push('/login')
   }
 
-  const handleProjectSubmit = async (e: React.FormEvent) => {
+  const handleDelete = async (id: number) => {
+    if(!confirm('Hapus proyek ini secara permanen?')) return
+    const { error } = await supabase.from('projects').delete().eq('id', id)
+    if (!error) fetchProjects()
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    setLoading(true)
+    setUploading(true)
     const tagsArray = formProject.tags.split(',').map(tag => tag.trim())
 
     const { error } = await supabase.from('projects').insert([{
@@ -48,127 +57,112 @@ export default function AdminPage() {
         description: formProject.description,
         tags: tagsArray,
         link: formProject.link,
-        image_url: '' 
-      }])
+    }])
 
-    if (error) {
-      alert('Error: ' + error.message)
-    } else {
-      alert('Sukses Upload Proyek!')
+    if (!error) {
       setFormProject({ title: '', description: '', tags: '', link: '' })
       fetchProjects()
-      router.refresh()
+    } else {
+      alert(error.message)
     }
-    setLoading(false)
+    setUploading(false)
   }
 
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-background">Memuat akses...</div>
+
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 md:p-12">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
-        
-        <div className="flex gap-4 mb-8 border-b border-border pb-4">
-          <button 
-            onClick={() => setActiveTab('projects')}
-            className={`px-4 py-2 rounded-md font-medium transition-colors ${activeTab === 'projects' ? 'bg-primary text-primary-foreground' : 'hover:bg-secondary'}`}
-          >
-            Manage Projects
-          </button>
-          <button 
-            onClick={() => setActiveTab('articles')}
-            className={`px-4 py-2 rounded-md font-medium transition-colors ${activeTab === 'articles' ? 'bg-primary text-primary-foreground' : 'hover:bg-secondary'}`}
-          >
-            Manage Articles (Coming Soon)
-          </button>
+    <div className="min-h-screen bg-background text-foreground">
+      <nav className="border-b border-border bg-card px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div className="flex items-center gap-2 font-bold text-lg">
+          <LayoutDashboard className="w-5 h-5" />
+          <span>Nephyy Console</span>
+        </div>
+        <button 
+          onClick={handleLogout} 
+          className="text-sm font-medium text-destructive hover:text-destructive/80 flex items-center gap-2"
+        >
+          <LogOut size={16} /> Keluar
+        </button>
+      </nav>
+
+      <div className="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="lg:col-span-1 space-y-6">
+          <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
+            <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+              <Plus size={18} /> Upload Proyek
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="text-xs font-medium uppercase text-muted-foreground">Nama Proyek</label>
+                <input 
+                  className="w-full mt-1 px-3 py-2 rounded-md border border-input bg-background focus:ring-2 focus:ring-primary focus:outline-none" 
+                  value={formProject.title}
+                  onChange={e => setFormProject({...formProject, title: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium uppercase text-muted-foreground">Deskripsi Singkat</label>
+                <textarea 
+                  className="w-full mt-1 px-3 py-2 rounded-md border border-input bg-background focus:ring-2 focus:ring-primary focus:outline-none" 
+                  rows={4}
+                  value={formProject.description}
+                  onChange={e => setFormProject({...formProject, description: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium uppercase text-muted-foreground">Tech Stack (Koma)</label>
+                <input 
+                  className="w-full mt-1 px-3 py-2 rounded-md border border-input bg-background focus:ring-2 focus:ring-primary focus:outline-none" 
+                  placeholder="Next.js, TypeScript, AI"
+                  value={formProject.tags}
+                  onChange={e => setFormProject({...formProject, tags: e.target.value})}
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-xs font-medium uppercase text-muted-foreground">Link Demo / Repo</label>
+                <input 
+                  type="url"
+                  className="w-full mt-1 px-3 py-2 rounded-md border border-input bg-background focus:ring-2 focus:ring-primary focus:outline-none" 
+                  value={formProject.link}
+                  onChange={e => setFormProject({...formProject, link: e.target.value})}
+                />
+              </div>
+              <button disabled={uploading} className="w-full bg-primary text-primary-foreground py-2.5 rounded-md font-medium hover:bg-primary/90 transition-all">
+                {uploading ? 'Menyimpan...' : 'Terbitkan Proyek'}
+              </button>
+            </form>
+          </div>
         </div>
 
-        {activeTab === 'projects' && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            
-            <div className="bg-card p-6 rounded-xl border shadow-sm h-fit">
-              <h2 className="text-xl font-semibold mb-4">Tambah Proyek Baru</h2>
-              <form onSubmit={handleProjectSubmit} className="space-y-4">
+        <div className="lg:col-span-2">
+          <h2 className="text-xl font-bold mb-6">Arsip Portofolio ({projects.length})</h2>
+          <div className="grid gap-4">
+            {projects.map((project) => (
+              <div key={project.id} className="p-5 rounded-xl border border-border bg-card flex justify-between items-start hover:border-primary/40 transition-colors">
                 <div>
-                  <label className="text-sm font-medium">Judul</label>
-                  <input 
-                    className="w-full mt-1 p-2 rounded border bg-background" 
-                    value={formProject.title}
-                    onChange={e => setFormProject({...formProject, title: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Deskripsi</label>
-                  <textarea 
-                    className="w-full mt-1 p-2 rounded border bg-background" 
-                    rows={3}
-                    value={formProject.description}
-                    onChange={e => setFormProject({...formProject, description: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Tags (pisahkan koma)</label>
-                  <input 
-                    className="w-full mt-1 p-2 rounded border bg-background" 
-                    placeholder="React, Nextjs, Supabase"
-                    value={formProject.tags}
-                    onChange={e => setFormProject({...formProject, tags: e.target.value})}
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="text-sm font-medium">Link URL</label>
-                  <input 
-                    type="url"
-                    className="w-full mt-1 p-2 rounded border bg-background" 
-                    value={formProject.link}
-                    onChange={e => setFormProject({...formProject, link: e.target.value})}
-                  />
-                </div>
-                <button disabled={loading} className="w-full bg-primary text-primary-foreground py-2 rounded hover:bg-primary/90">
-                  {loading ? 'Menyimpan...' : 'Simpan Proyek'}
-                </button>
-              </form>
-            </div>
-
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Daftar Proyek ({projects.length})</h2>
-              <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                {projects.map((project) => (
-                  <div key={project.id} className="p-4 rounded-lg border bg-card flex justify-between items-start group hover:border-primary/50 transition-colors">
-                    <div>
-                      <h3 className="font-bold">{project.title}</h3>
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-1">{project.description}</p>
-                      <div className="flex gap-1 mt-2">
-                        {project.tags.map((t: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 bg-secondary rounded">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <button 
-                      onClick={() => handleDeleteProject(project.id)}
-                      className="p-2 text-red-500 hover:bg-red-500/10 rounded transition-colors"
-                      title="Hapus"
-                    >
-                      <Trash2 size={16} />
-                    </button>
+                  <h3 className="font-bold text-lg">{project.title}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 mb-3 max-w-lg">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((t: string, i: number) => (
+                      <span key={i} className="text-[10px] uppercase tracking-wider font-semibold px-2 py-1 bg-secondary rounded-full">{t}</span>
+                    ))}
                   </div>
-                ))}
+                </div>
+                <button 
+                  onClick={() => handleDelete(project.id)}
+                  className="p-2 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-md transition-all"
+                  title="Hapus Proyek"
+                >
+                  <Trash2 size={18} />
+                </button>
               </div>
-            </div>
-
+            ))}
           </div>
-        )}
-
-        {activeTab === 'articles' && (
-           <div className="text-center py-20 bg-secondary/20 rounded-xl border border-dashed">
-              <h3 className="text-lg font-medium">Fitur Artikel</h3>
-              <p className="text-muted-foreground">Silakan fokus ke upload proyek dulu. Modul ini akan kita aktifkan nanti.</p>
-           </div>
-        )}
+        </div>
       </div>
     </div>
   )
-  }
-                  
+    }                                                 
