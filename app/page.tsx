@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, Cpu, Database, Network, Code, Briefcase } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, Cpu, Database, Network, Code, GraduationCap, MapPin } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
 
@@ -80,11 +80,11 @@ export default function Home() {
           <div className="flex items-center gap-3">
              <ThemeToggle />
              <Link 
-                href="https://wa.me/79992461528"
+                href="https://wa.me/6281533331355"
                 target="_blank"
                 className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-primary px-5 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all hover:scale-105"
              >
-                Kolaborasi
+                Hubungi Bintang
              </Link>
           </div>
         </div>
@@ -101,23 +101,23 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
-              Available for Global Projects
+              Open for Collaboration
             </div>
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-[0.9] animate-in fade-in slide-in-from-bottom-8 duration-700 delay-100">
-              Transformasi Ide <br />
+              Bintang Putra <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-pink-500">
-                Menjadi Realitas.
+                Pratama.
               </span>
             </h1>
             
             <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-8 duration-700 delay-200">
-              Saya adalah <span className="text-foreground font-semibold">Creative Technologist</span> yang menspesialisasikan diri dalam membangun ekosistem web modern, skalabel, dan berorientasi pada pengalaman pengguna.
+              Dikenal secara digital sebagai <span className="text-foreground font-semibold">Nephyy</span>. Siswa SMK yang mendedikasikan diri untuk membangun ekosistem web modern dan teknologi masa depan.
             </p>
             
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-300">
                <Link href="#projects" className="h-12 px-8 rounded-full bg-primary text-primary-foreground font-semibold flex items-center gap-2 hover:bg-primary/90 transition-all hover:pr-10 group">
-                  Eksplorasi Karya <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  Lihat Karya Saya <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                </Link>
                <Link href="https://github.com/Nephyy1" target="_blank" className="h-12 px-8 rounded-full border border-border bg-background hover:bg-secondary font-semibold flex items-center gap-2 transition-all">
                   <Github className="w-4 h-4" /> GitHub
@@ -130,34 +130,56 @@ export default function Home() {
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
                <div>
-                  <h2 className="text-3xl font-bold mb-6">Arsitektur Karir</h2>
-                  <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent">
+                  <h2 className="text-3xl font-bold mb-6">Profil Profesional</h2>
+                  
+                  <div className="bg-card border border-border rounded-2xl p-6 mb-8 shadow-sm">
+                    <div className="flex items-center gap-4 mb-4">
+                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <GraduationCap className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg">Pendidikan</h3>
+                        <p className="text-muted-foreground">SMK Negeri 2 Banyumas</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                        <MapPin className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg">Domisili</h3>
+                        <p className="text-muted-foreground">Jawa Tengah, Indonesia</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-border before:to-transparent pl-2">
                     
-                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div className="relative flex items-center gap-6 group">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
                         <Cpu className="w-5 h-5 text-primary" />
                       </div>
-                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
+                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
                         <div className="font-bold text-lg">2025: AI Integration</div>
                         <div className="text-muted-foreground text-sm mt-1">Implementasi Deep Learning & SQL Optimization.</div>
                       </div>
                     </div>
 
-                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div className="relative flex items-center gap-6 group">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
                         <Network className="w-5 h-5 text-primary" />
                       </div>
-                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
+                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
                         <div className="font-bold text-lg">2023: Fullstack Era</div>
                         <div className="text-muted-foreground text-sm mt-1">Pengembangan sistem kompleks dengan Next.js ecosystem.</div>
                       </div>
                     </div>
 
-                    <div className="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
+                    <div className="relative flex items-center gap-6 group">
+                      <div className="flex items-center justify-center w-10 h-10 rounded-full border border-border bg-card shadow shrink-0 z-10">
                         <Code className="w-5 h-5 text-primary" />
                       </div>
-                      <div className="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
+                      <div className="w-full p-4 rounded-xl border border-border bg-card/50 hover:bg-card transition-colors shadow-sm">
                         <div className="font-bold text-lg">2020: The Beginning</div>
                         <div className="text-muted-foreground text-sm mt-1">Fondasi Web Development (HTML/CSS/JS).</div>
                       </div>
@@ -167,13 +189,13 @@ export default function Home() {
                </div>
 
                <div className="bg-secondary/20 p-8 rounded-3xl border border-border/50 sticky top-24">
-                  <Briefcase className="w-10 h-10 text-primary mb-6" />
-                  <h3 className="text-2xl font-bold mb-4">Filosofi Pengembangan</h3>
+                  <Terminal className="w-10 h-10 text-primary mb-6" />
+                  <h3 className="text-2xl font-bold mb-4">Tentang Nephyy</h3>
                   <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                    "Kode bukan sekadar instruksi mesin, melainkan seni menyusun logika untuk memecahkan masalah manusia secara elegan."
+                    "Sebagai siswa SMK, saya tidak hanya belajar kode, tapi memanfaatkannya untuk memecahkan masalah nyata. **Nephyy** adalah identitas dimana kreativitas dan logika bertemu."
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {['Next.js 14', 'TypeScript', 'Supabase', 'Tailwind', 'PostgreSQL', 'Node.js'].map((tech) => (
+                    {['Next.js', 'React Native', 'Supabase', 'Node.js', 'TypeScript', 'Tailwind'].map((tech) => (
                       <span key={tech} className="px-3 py-1 bg-background rounded-md text-sm font-medium border border-border shadow-sm">
                         {tech}
                       </span>
@@ -194,7 +216,7 @@ export default function Home() {
                 </p>
               </div>
               <Link href="#" className="text-primary font-semibold hover:underline underline-offset-4 flex items-center gap-2">
-                Lihat Repositori Lengkap <ArrowRight className="w-4 h-4" />
+                Lihat Semua di GitHub <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
             
@@ -235,8 +257,8 @@ export default function Home() {
       <footer className="bg-background border-t border-border py-12">
         <div className="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="text-center md:text-left">
-            <h4 className="font-bold text-lg mb-1">Nephyy.</h4>
-            <p className="text-sm text-muted-foreground">© 2025 Creative Technologist.</p>
+            <h4 className="font-bold text-lg mb-1">Bintang P. Pratama (Nephyy)</h4>
+            <p className="text-sm text-muted-foreground">© 2025 Creative Technologist. All rights reserved.</p>
           </div>
           <div className="flex gap-6">
              <Link href="https://github.com/Nephyy1" className="text-muted-foreground hover:text-foreground transition-colors"><Github className="w-5 h-5" /></Link>
