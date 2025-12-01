@@ -1,132 +1,166 @@
-import { ArrowRight, Code, Layers, Sparkles, Github, Instagram, Linkedin } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight, Github, Globe, Layers, LayoutTemplate, Smartphone } from "lucide-react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 export default function Home() {
   return (
-    <main className="min-h-screen relative selection:bg-cyan-500/30">
-      <div className="fixed inset-0 -z-10 h-full w-full bg-[#0f172a] bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px]">
-        <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] bg-purple-500/20 blur-[120px] rounded-full" />
-        <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] bg-cyan-500/10 blur-[120px] rounded-full" />
-      </div>
-
-      <nav className="fixed top-0 w-full z-50 glass-panel border-b-0 border-b-white/5">
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="text-2xl font-bold tracking-tighter text-gradient">
-            Nephyy
-          </span>
-          <div className="hidden md:flex gap-8 text-sm font-medium text-slate-300">
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Home</Link>
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Projects</Link>
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Blog</Link>
-            <Link href="#" className="hover:text-cyan-400 transition-colors">Contact</Link>
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
+      <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container flex h-14 max-w-screen-2xl items-center justify-between px-6">
+          <div className="mr-4 flex">
+            <Link className="mr-6 flex items-center space-x-2 font-bold text-xl tracking-tight" href="/">
+              Nephyy.
+            </Link>
+            <nav className="hidden md:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+              <Link href="#" className="transition-colors hover:text-foreground">About</Link>
+              <Link href="#" className="transition-colors hover:text-foreground">Projects</Link>
+              <Link href="#" className="transition-colors hover:text-foreground">Blog</Link>
+            </nav>
           </div>
-          <button className="px-5 py-2 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-medium">
-            Let's Talk
-          </button>
+          <div className="flex items-center gap-2">
+             <Link 
+                href="#"
+                className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+             >
+                Contact Me
+             </Link>
+             <ThemeToggle />
+          </div>
         </div>
-      </nav>
+      </header>
 
-      <section className="pt-40 pb-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-medium mb-6 animate-pulse">
-            <Sparkles size={12} />
-            <span>Open for Collaboration</span>
+      <main className="flex-1">
+        <section className="container px-6 py-24 md:py-32 flex flex-col items-start gap-6 max-w-screen-xl mx-auto">
+          <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+            Available for hire
           </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-tight">
-            Building Digital <br />
-            <span className="text-gradient">Experiences</span> That Matter
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-foreground max-w-3xl">
+            Designing digital <br className="hidden md:block"/> experiences that <span className="text-muted-foreground">scale.</span>
           </h1>
-          
-          <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
-            Hi, I'm <span className="text-slate-200 font-semibold">Nephyy</span>. 
-            A creative developer focused on crafting intuitive interfaces and robust web applications with modern technologies.
+          <p className="max-w-[700px] text-lg text-muted-foreground md:text-xl">
+            I'm Nephyy, a full-stack developer passionate about building accessible, pixel-perfect user interfaces that blend art and functionality.
           </p>
+          <div className="flex flex-col sm:flex-row gap-4 mt-4 w-full sm:w-auto">
+             <Link 
+                href="#"
+                className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+             >
+                View Projects
+             </Link>
+             <Link 
+                href="#"
+                className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+             >
+                Read Blog
+             </Link>
+          </div>
+        </section>
+
+        <section className="container px-6 py-12 md:py-24 max-w-screen-xl mx-auto">
+          <div className="flex flex-col gap-4 mb-12">
+            <h2 className="text-3xl font-bold tracking-tight">Selected Work</h2>
+            <p className="text-muted-foreground text-lg">A selection of projects I've worked on recently.</p>
+          </div>
           
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4">
-            <button className="group relative px-8 py-3 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 hover:-translate-y-1 transition-all duration-300">
-              Explore Portfolio
-              <ArrowRight className="inline-block ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-            <button className="px-8 py-3 rounded-full glass-panel hover:bg-white/5 transition-all font-medium border border-white/10">
-              View Articles
-            </button>
-          </div>
-
-          <div className="mt-16 flex justify-center gap-6 text-slate-400">
-            <Github className="w-6 h-6 hover:text-white cursor-pointer transition-colors hover:scale-110" />
-            <Linkedin className="w-6 h-6 hover:text-white cursor-pointer transition-colors hover:scale-110" />
-            <Instagram className="w-6 h-6 hover:text-white cursor-pointer transition-colors hover:scale-110" />
-          </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center justify-between mb-12">
-            <h2 className="text-3xl font-bold">Featured Concept</h2>
-            <Link href="#" className="text-cyan-400 text-sm hover:underline underline-offset-4">View All</Link>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="group relative rounded-2xl glass-panel p-1 overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="h-48 bg-slate-800/50 rounded-xl mb-4 overflow-hidden relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-slate-600">
-                    <Code size={40} />
-                 </div>
-              </div>
-              <div className="p-4 relative">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-cyan-400 transition-colors">SaaS Dashboard</h3>
-                <p className="text-slate-400 text-sm mb-4">A complete analytics platform designed for high scalability and performance.</p>
-                <div className="flex gap-2">
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">Next.js</span>
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">Tailwind</span>
-                </div>
-              </div>
+            
+            <div className="group relative rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all overflow-hidden col-span-1 md:col-span-2">
+               <div className="p-6 flex flex-col h-full justify-between">
+                  <div className="mb-4 p-4 rounded-lg bg-secondary/50 w-fit">
+                    <LayoutTemplate className="w-8 h-8 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">E-Commerce Dashboard</h3>
+                    <p className="text-muted-foreground mb-4">A comprehensive dashboard for managing products, orders, and analytics with real-time data visualization.</p>
+                    <div className="flex gap-2">
+                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground">Next.js</span>
+                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground">Supabase</span>
+                    </div>
+                  </div>
+               </div>
             </div>
 
-            <div className="group relative rounded-2xl glass-panel p-1 overflow-hidden hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="h-48 bg-slate-800/50 rounded-xl mb-4 overflow-hidden relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-slate-600">
-                    <Layers size={40} />
-                 </div>
-              </div>
-              <div className="p-4 relative">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">E-Commerce API</h3>
-                <p className="text-slate-400 text-sm mb-4">Headless commerce solution with integrated payment gateways and inventory.</p>
-                 <div className="flex gap-2">
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">Node.js</span>
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">Supabase</span>
-                </div>
-              </div>
+            <div className="group relative rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all overflow-hidden col-span-1">
+               <div className="p-6 flex flex-col h-full justify-between">
+                  <div className="mb-4 p-4 rounded-lg bg-secondary/50 w-fit">
+                    <Smartphone className="w-8 h-8 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Mobile Banking App</h3>
+                    <p className="text-muted-foreground mb-4">Responsive fintech interface design focusing on accessibility.</p>
+                    <div className="flex gap-2">
+                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground">React Native</span>
+                    </div>
+                  </div>
+               </div>
             </div>
 
-             <div className="group relative rounded-2xl glass-panel p-1 overflow-hidden hover:shadow-2xl hover:shadow-pink-500/10 transition-all duration-500">
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="h-48 bg-slate-800/50 rounded-xl mb-4 overflow-hidden relative">
-                 <div className="absolute inset-0 flex items-center justify-center text-slate-600">
-                    <Sparkles size={40} />
-                 </div>
-              </div>
-              <div className="p-4 relative">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-pink-400 transition-colors">AI Content Gen</h3>
-                <p className="text-slate-400 text-sm mb-4">Generative AI wrapper application for creating marketing copy automatically.</p>
-                 <div className="flex gap-2">
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">OpenAI</span>
-                   <span className="text-xs px-2 py-1 rounded bg-slate-800 text-slate-300 border border-slate-700">React</span>
-                </div>
-              </div>
+            <div className="group relative rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all overflow-hidden col-span-1">
+               <div className="p-6 flex flex-col h-full justify-between">
+                  <div className="mb-4 p-4 rounded-lg bg-secondary/50 w-fit">
+                    <Layers className="w-8 h-8 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold mb-2">Design System</h3>
+                    <p className="text-muted-foreground mb-4">A unified UI library for consistent branding across products.</p>
+                     <div className="flex gap-2">
+                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground">Storybook</span>
+                    </div>
+                  </div>
+               </div>
+            </div>
+
+             <div className="group relative rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all overflow-hidden col-span-1 md:col-span-2">
+               <div className="p-6 flex flex-col h-full justify-between">
+                  <div className="mb-4 p-4 rounded-lg bg-secondary/50 w-fit">
+                    <Globe className="w-8 h-8 text-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">Travel Blog Platform</h3>
+                    <p className="text-muted-foreground mb-4">Content management system with rich text editing and image optimization for travel enthusiasts.</p>
+                     <div className="flex gap-2">
+                        <span className="text-xs font-medium px-2.5 py-0.5 rounded-md bg-secondary text-secondary-foreground">T3 Stack</span>
+                    </div>
+                  </div>
+               </div>
             </div>
 
           </div>
-        </div>
-      </section>
+          
+           <div className="mt-12 flex justify-center">
+             <Link href="#" className="group inline-flex items-center text-sm font-medium hover:text-primary transition-colors">
+               View All Projects <ArrowRight className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform"/>
+             </Link>
+           </div>
+        </section>
 
-      <footer className="border-t border-white/5 py-10 text-center text-slate-500 text-sm">
-        <p>&copy; {new Date().getFullYear()} Nephyy. All rights reserved.</p>
+        <section className="border-t border-border/40 bg-secondary/20">
+           <div className="container px-6 py-16 md:py-24 max-w-screen-xl mx-auto text-center">
+              <h2 className="text-3xl font-bold tracking-tight mb-4">Ready to start a project?</h2>
+              <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
+                Let's collaborate to build something impactful. I'm currently available for freelance work and consulting.
+              </p>
+              <Link 
+                href="#"
+                className="inline-flex h-11 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90"
+             >
+                Get in Touch
+             </Link>
+           </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-border/40 bg-background py-8">
+        <div className="container px-6 flex flex-col md:flex-row items-center justify-between gap-4 max-w-screen-xl mx-auto">
+          <p className="text-sm text-muted-foreground">
+            © 2024 Nephyy. Built with Next.js & Tailwind.
+          </p>
+          <div className="flex items-center gap-4 text-muted-foreground">
+            <Link href="#" className="hover:text-foreground transition-colors"><Github className="w-5 h-5" /></Link>
+            <Link href="#" className="hover:text-foreground transition-colors"><Globe className="w-5 h-5" /></Link>
+          </div>
+        </div>
       </footer>
-    </main>
+    </div>
   );
-      }
+}
