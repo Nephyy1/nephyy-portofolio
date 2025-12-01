@@ -349,9 +349,7 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
-                          {article.title}
-                       </h3>
+                    </h3>
                        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-6 flex-1">
                           {article.excerpt}
                        </p>
