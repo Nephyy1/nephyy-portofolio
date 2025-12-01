@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award, CheckCircle2, BookOpen, Calendar } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
 
@@ -14,22 +14,32 @@ interface Project {
   link: string
 }
 
+interface Article {
+  id: number
+  title: string
+  excerpt: string
+  slug: string
+  cover_image: string
+  created_at: string
+}
+
 export default function Home() {
   const [dbProjects, setDbProjects] = useState<Project[]>([])
+  const [dbArticles, setDbArticles] = useState<Article[]>([])
   
   useEffect(() => {
-    const fetchProjects = async () => {
+    const fetchData = async () => {
       try {
-        const { data } = await supabase
-          .from('projects')
-          .select('*')
-          .order('created_at', { ascending: false })
-        if (data) setDbProjects(data)
+        const { data: projects } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
+        if (projects) setDbProjects(projects)
+
+        const { data: articles } = await supabase.from('articles').select('*').order('created_at', { ascending: false })
+        if (articles) setDbArticles(articles)
       } catch (error) {
         console.error(error)
       }
     }
-    fetchProjects()
+    fetchData()
   }, [])
 
   const defaultProjects = [
@@ -56,6 +66,33 @@ export default function Home() {
     }
   ]
 
+  const defaultArticles = [
+    {
+      id: 201,
+      title: "Masa Depan AI dalam Pengembangan Web: Ancaman atau Peluang?",
+      excerpt: "Menganalisis bagaimana Generative AI mengubah cara kita menulis kode, mendesain UI, dan dampaknya bagi karir developer di 5 tahun mendatang.",
+      slug: "ai-web-dev",
+      cover_image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=800&auto=format&fit=crop",
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 202,
+      title: "Optimasi Performa Next.js untuk Core Web Vitals",
+      excerpt: "Panduan teknis mendalam tentang Server Components, Image Optimization, dan strategi caching untuk mencapai skor Lighthouse 100.",
+      slug: "nextjs-performance",
+      cover_image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+      created_at: new Date().toISOString()
+    },
+    {
+      id: 203,
+      title: "Mengapa TypeScript Adalah Investasi Wajib di 2025",
+      excerpt: "Menjelaskan mengapa Type Safety bukan hanya soal mencegah bug, tapi tentang skalabilitas tim dan maintainability kode jangka panjang.",
+      slug: "typescript-2025",
+      cover_image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop",
+      created_at: new Date().toISOString()
+    }
+  ]
+
   const certificates = [
     {
       id: 1,
@@ -78,6 +115,7 @@ export default function Home() {
   ]
 
   const displayProjects = dbProjects.length > 0 ? dbProjects : defaultProjects
+  const displayArticles = dbArticles.length > 0 ? dbArticles : defaultArticles
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden">
@@ -91,8 +129,8 @@ export default function Home() {
             </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               <Link href="#about" className="hover:text-primary transition-colors hover:underline underline-offset-4">Tentang</Link>
-              <Link href="#achievements" className="hover:text-primary transition-colors hover:underline underline-offset-4">Sertifikat</Link>
               <Link href="#projects" className="hover:text-primary transition-colors hover:underline underline-offset-4">Portofolio</Link>
+              <Link href="#blog" className="hover:text-primary transition-colors hover:underline underline-offset-4">Artikel</Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
@@ -311,20 +349,20 @@ export default function Home() {
                         </span>
                       ))}
                     </div>
-                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors">{project.title}</h3>
-                    <p className="text-muted-foreground text-sm leading-relaxed mb-6 flex-1 line-clamp-3">
-                      {project.description}
-                    </p>
-                    {project.link && (
-                      <Link href={project.link} target="_blank" className="inline-flex items-center text-sm font-semibold text-foreground hover:text-primary transition-colors mt-auto group/link">
-                        Lihat Detail <ArrowRight className="ml-2 w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+                    <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors leading-tight">
+                          {article.title}
+                       </h3>
+                       <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3 mb-6 flex-1">
+                          {article.excerpt}
+                       </p>
+                       <div className="inline-flex items-center text-sm font-semibold text-primary mt-auto">
+                          Baca Selengkapnya <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                       </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+           </div>
         </section>
 
       </main>
@@ -340,8 +378,7 @@ export default function Home() {
              <Link href="https://nephyy.my.id" className="text-muted-foreground hover:text-foreground transition-colors hover:scale-110"><Globe className="w-5 h-5" /></Link>
           </div>
         </div>
-       </footer>
+      </footer>
     </div>
   )
 }
-      
