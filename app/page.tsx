@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Link from "next/link"
-import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles } from "lucide-react"
+import { ArrowRight, Github, Globe, Terminal, User, GraduationCap, MapPin, Phone, Database, Sparkles, Award } from "lucide-react"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { supabase } from '@/lib/supabase'
 
@@ -56,6 +56,27 @@ export default function Home() {
     }
   ]
 
+  const certificates = [
+    {
+      id: 1,
+      title: "Web Development Mastery",
+      issuer: "Fullstack Certification",
+      image: "/certificate1.png"
+    },
+    {
+      id: 2,
+      title: "AI & Machine Learning",
+      issuer: "Artificial Intelligence Bootcamp",
+      image: "/certificate2.png"
+    },
+    {
+      id: 3,
+      title: "SQL Database Specialist",
+      issuer: "Data Management Professional",
+      image: "/certificate3.png"
+    }
+  ]
+
   const displayProjects = dbProjects.length > 0 ? dbProjects : defaultProjects
 
   return (
@@ -70,8 +91,8 @@ export default function Home() {
             </Link>
             <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-muted-foreground">
               <Link href="#about" className="hover:text-primary transition-colors hover:underline underline-offset-4">Tentang</Link>
+              <Link href="#achievements" className="hover:text-primary transition-colors hover:underline underline-offset-4">Sertifikat</Link>
               <Link href="#projects" className="hover:text-primary transition-colors hover:underline underline-offset-4">Portofolio</Link>
-              <Link href="#" className="hover:text-primary transition-colors hover:underline underline-offset-4">Jurnal</Link>
             </nav>
           </div>
           <div className="flex items-center gap-3">
@@ -218,7 +239,44 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="projects" className="py-24 bg-background">
+        <section id="achievements" className="py-24 bg-background border-t border-border/50">
+          <div className="container mx-auto px-6 max-w-6xl">
+            <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+               <div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4 flex items-center gap-3">
+                    <Award className="w-8 h-8 text-primary" /> Sertifikasi & Pencapaian
+                  </h2>
+                  <p className="text-muted-foreground text-lg max-w-xl">
+                     Bukti kompetensi teknis dan dedikasi pembelajaran dalam berbagai bidang teknologi.
+                  </p>
+               </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {certificates.map((cert) => (
+                <div key={cert.id} className="group relative rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:shadow-primary/10 transition-all duration-500">
+                  <div className="aspect-[4/3] overflow-hidden bg-secondary relative">
+                    <img 
+                      src={cert.image} 
+                      alt={cert.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-transparent to-transparent opacity-60"></div>
+                  </div>
+                  <div className="absolute bottom-0 left-0 w-full p-6 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <div className="inline-block px-2 py-1 rounded bg-primary/20 backdrop-blur-md border border-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider mb-2">
+                      Verified
+                    </div>
+                    <h3 className="text-lg font-bold text-foreground leading-tight mb-1">{cert.title}</h3>
+                    <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="projects" className="py-24 bg-secondary/10">
           <div className="container mx-auto px-6 max-w-6xl">
             <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 animate-in fade-in slide-in-from-bottom-8 duration-700">
               <div>
@@ -236,14 +294,14 @@ export default function Home() {
               {displayProjects.map((project, idx) => (
                 <div 
                   key={project.id} 
-                  className="group flex flex-col h-full bg-card border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2"
+                  className="group flex flex-col h-full bg-background border border-border rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2"
                   style={{ animationDelay: `${idx * 100}ms` }}
                 >
                   <div className="h-48 bg-gradient-to-br from-secondary to-background relative overflow-hidden flex items-center justify-center group-hover:scale-105 transition-transform duration-700">
                     <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px] opacity-10"></div>
                     <Database className="w-16 h-16 text-primary/20 group-hover:text-primary/40 transition-colors duration-500 transform group-hover:scale-110 group-hover:rotate-3" />
                   </div>
-                  <div className="p-6 flex flex-col flex-1 relative z-10 bg-card">
+                  <div className="p-6 flex flex-col flex-1 relative z-10 bg-background">
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags?.map((tag, idx) => (
                         <span key={idx} className="px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider bg-secondary text-secondary-foreground border border-border/50">
