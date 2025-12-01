@@ -6,8 +6,8 @@ import { ThemeProvider } from "@/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Nephyy | Portfolio",
-  description: "Creative Developer Portfolio",
+  title: "Nephyy | Portofolio",
+  description: "Portofolio Resmi Nephyy",
 };
 
 export default function RootLayout({
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider
             attribute="class"
