@@ -26,8 +26,16 @@ interface Article {
 export default function Home() {
   const [dbProjects, setDbProjects] = useState<Project[]>([])
   const [dbArticles, setDbArticles] = useState<Article[]>([])
+  // State untuk mengontrol tampilan konten utama
+  const [showContent, setShowContent] = useState(false)
   
   useEffect(() => {
+    // Timer untuk menampilkan konten SETELAH preloader berjalan
+    // 2800ms disesuaikan agar muncul tepat sebelum preloader hilang
+    const timer = setTimeout(() => {
+      setShowContent(true)
+    }, 2800)
+
     const fetchData = async () => {
       try {
         const { data: projects } = await supabase.from('projects').select('*').order('created_at', { ascending: false })
@@ -40,6 +48,8 @@ export default function Home() {
       }
     }
     fetchData()
+
+    return () => clearTimeout(timer)
   }, [])
 
   const defaultProjects = [
@@ -148,9 +158,10 @@ export default function Home() {
         @keyframes pop-in { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         @keyframes preloader-fade-out { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
         
-        .page-wrapper {
+        /* Animasi masuk untuk konten utama */
+        .content-fade-enter {
             opacity: 0;
-            animation: content-fade-in 0.8s ease-out forwards 3.5s;
+            animation: content-fade-in 1s ease-out forwards;
         }
 
         @keyframes content-fade-in { 
@@ -159,6 +170,7 @@ export default function Home() {
         }
       `}</style>
 
+      {/* Preloader selalu dirender di awal */}
       <div id="preloader">
         <svg className="logo-svg" viewBox="0 0 110 100" xmlns="http://www.w3.org/2000/svg">
             <g id="blueprint-guides" stroke="#FFFFFF" strokeWidth="1"><line x1="0" y1="50" x2="110" y2="50" /><line x1="50" y1="0" x2="50" y2="100" /></g>
@@ -167,8 +179,9 @@ export default function Home() {
         </svg>
       </div>
 
-      <div className="page-wrapper">
-        <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden">
+      {/* Konten Utama hanya dirender jika showContent = true */}
+      {showContent && (
+        <div className="content-fade-enter min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-primary/20 selection:text-primary overflow-x-hidden">
           
           <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
             <div className="container mx-auto px-6 h-16 flex items-center justify-between max-w-7xl">
@@ -430,7 +443,7 @@ export default function Home() {
             </div>
           </footer>
         </div>
-      </div>
+      )}
     </>
   )
-}
+}}}
