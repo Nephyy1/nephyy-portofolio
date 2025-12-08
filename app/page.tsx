@@ -132,8 +132,14 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans selection:bg-cyan-500/20 selection:text-cyan-500 overflow-x-hidden relative">
+    <div className="min-h-screen bg-background text-foreground flex flex-col font-sans overflow-x-hidden relative selection:bg-white/10 selection:text-white">
       
+      <style jsx global>{`
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+      `}</style>
+
       <div className="fixed inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500/5 blur-[120px] rounded-full mix-blend-screen" />
         <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500/5 blur-[120px] rounded-full mix-blend-screen" />
@@ -157,7 +163,7 @@ export default function Home() {
             <Link 
                 href="https://wa.me/6281533331355"
                 target="_blank"
-                className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-500 px-5 text-sm font-medium hover:bg-cyan-500 hover:text-white transition-all active:scale-95"
+                className="hidden sm:inline-flex h-9 items-center justify-center rounded-full bg-secondary/50 border border-white/10 text-foreground px-5 text-sm font-medium hover:bg-secondary transition-all active:scale-95"
             >
                 Hubungi Saya
             </Link>
@@ -174,8 +180,8 @@ export default function Home() {
             variants={staggerContainer}
             className="container mx-auto px-6 max-w-5xl text-center"
           >
-            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-xs font-semibold mb-8 backdrop-blur-sm text-cyan-400">
-              <Sparkles className="w-3 h-3" />
+            <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-secondary/30 text-xs font-semibold mb-8 backdrop-blur-sm text-foreground/80">
+              <Sparkles className="w-3 h-3 text-yellow-500 fill-yellow-500" />
               <span>Terbuka untuk Kolaborasi Proyek</span>
             </motion.div>
             
